@@ -1,0 +1,15 @@
+/* Global Variables */
+
+:root {
+    --for-color: #fff;
+    --bkg-color: #111;
+    --acc-red: #ff4040;
+    --acc-orange: #f69f34;
+    --acc-yellow: #ffc10f;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--for-color);
+    background-color: var(--bkg-color);
+}
