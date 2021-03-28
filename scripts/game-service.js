@@ -7,6 +7,14 @@ const rankings = {
 };
 export const HANDS = ['scissors', 'stone', 'paper'];
 
+function aiPickHand() {
+    return HANDS[Math.floor(Math.random() * HANDS.length)]
+}
+
+
+
+/*
+
 let isConnectedState = false;
 
 export function setConnected(newIsConnected) {
@@ -27,3 +35,5 @@ export function evaluateHand(playerName, playerHand, didWinHandlerCallbackFn) {
     const didWin = Boolean(Math.floor(Math.random() * 2));
     setTimeout(() => didWinHandlerCallbackFn(didWin), DELAY_MS);
 }
+
+*/
