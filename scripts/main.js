@@ -4,14 +4,33 @@ function renderOptions() {
     const orderedList = document.querySelector('#selectionList')
     const fragment = document.createDocumentFragment()
 
-    for (const hand in hands) {
+    for (const hand of hands) {
         const listItem = document.createElement('li')
         listItem.setAttribute('class', 'choice-item')
+        listItem.setAttribute('data-hand', hand.name)
+        listItem.addEventListener('click', picked)
         const choiceTitle = document.createTextNode(hand.name)
         listItem.appendChild(choiceTitle)
         fragment.appendChild(listItem)
     }
     orderedList.appendChild(fragment)
+}
+
+function picked(click) {
+    const hand = findHand(click.target.getAttribute('data-hand'))
+    const opponent = aiPickHand()
+    const result = hand.vs(opponent)
+    console.log(result)
+}
+
+function findHand(target) {
+    for (const hand of hands) {
+        if (target === hand.name) return hand
+    }
+}
+
+function aiPickHand() {
+    return hands[Math.floor(Math.random() * hands.length)]
 }
 
 renderOptions()

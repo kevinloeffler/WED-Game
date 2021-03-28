@@ -14,19 +14,13 @@ class Choice {
         return this.name
     }
 
-    info() {
-        console.log('name: ' + this.name)
-        console.log('wins: ' + this.wins)
-        console.log('loses: ' + this.loses)
-    }
-
     vs(opponent) {
         if (this.loses.includes(opponent)) {
-            return false
+            return -1 // Lost
         } else if (this.wins.includes(opponent)) {
-            return true
+            return 1 // Won
         } else {
-            throw new Error('Invalid game. No winner determined')
+            return 0 // Tie
         }
     }
 
