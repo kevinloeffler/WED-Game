@@ -2,10 +2,10 @@
 
 :root {
     --for-color: #fff;
-    --bkg-color: #111;
-    --acc-red: #ff4040;
-    --acc-orange: #f69f34;
-    --acc-yellow: #ffc10f;
+    --bkg-color: #101324;
+    --acc-orange: #FF8A59;
+    --acc-pink: #ED417B;
+    --acc-blue: #252851;
 }
 
 body {
