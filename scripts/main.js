@@ -1,5 +1,10 @@
 import {hands, rock, paper, scissor} from "./choices.js";
 
+// Assign often used elements
+const playerHandFeedback = document.querySelector('#player-hand-feedback')
+const oppFeedback = document.querySelector('#opp-feedback')
+const feedback = document.querySelector('#feedback')
+
 function renderOptions() {
     const orderedList = document.querySelector('#selectionList')
     const fragment = document.createDocumentFragment()
@@ -20,7 +25,7 @@ function picked(click) {
     const hand = findHand(click.target.getAttribute('data-hand'))
     const opponent = aiPickHand()
     const result = hand.vs(opponent)
-    console.log(result)
+    finishRound(result, hand, opponent)
 }
 
 function findHand(target) {
@@ -31,6 +36,26 @@ function findHand(target) {
 
 function aiPickHand() {
     return hands[Math.floor(Math.random() * hands.length)]
+}
+
+function finishRound(result, hand, opponent) {
+    switch (result) {
+        case 1:
+            feedback.textContent = 'Congrats, you won!'
+            // TODO add point
+            console.log('Round won')
+            break
+        case -1:
+            feedback.textContent = 'Oh no, you lost.'
+            console.log('Round lost')
+            break
+        case 0:
+            feedback.textContent = 'Its a tie.'
+            console.log('Round tied')
+            break
+    }
+    playerHandFeedback.textContent = hand.name
+    oppFeedback.textContent = opponent.name
 }
 
 renderOptions()
