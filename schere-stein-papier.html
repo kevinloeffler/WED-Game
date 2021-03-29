@@ -14,17 +14,32 @@
 </head>
 <body>
 
-<div class="game-wrapper">
-    <h1>Rock Paper Scissors</h1>
-    <section class="choices-selection" id="choices-list">
+<section class="leaderboard-wrapper">
+    <h1>Leaderboard</h1>
+    <div class="leaderboard" id="leaderboard">
         <!-- dynamically created -->
-    </section>
+    </div>
+    <div class="enter-wrapper">
+        <label for="player-name">WANT TO PLAY?</label>
+        <input type="text" id="player-name">
+        <button id="enter-button">PLAY GAME</button>
+        <p class="enter-error-msg" id="enter-error-msg">Enter a name between 5 and 50 characters</p>
+    </div>
+</section>
+
+<section class="play-wrapper hide-view-wrapper">
+    <h1>Play</h1>
+    <p>PICK YOUR HAND <!-- TODO add Player Name --></p>
+    <div class="choices-selection" id="choices">
+        <!-- dynamically created -->
+    </div>
     <div class="feedback">
         <!-- TODO add default state: "Pick a hand to start the game" -->
         <h3>You played <span id="player-hand-feedback">rock</span> vs <span id="opp-feedback">scissors</span></h3>
         <h3 id="feedback">Good luck!</h3>
     </div>
-</div>
+    <button id="leaderboard-button">LEADERBOARD</button>
+</section>
 
 </body>
 </html>

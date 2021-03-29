@@ -4,9 +4,42 @@ import {hands, rock, paper, scissor} from "./choices.js";
 const playerHandFeedback = document.querySelector('#player-hand-feedback')
 const oppFeedback = document.querySelector('#opp-feedback')
 const feedback = document.querySelector('#feedback')
-const choicesList = document.querySelector('#choices-list')
+const enterButton = document.querySelector('#enter-button')
+const leaderboardButton = document.querySelector('#leaderboard-button')
+const leaderboardView = document.querySelector('.leaderboard-wrapper')
+const playView = document.querySelector('.play-wrapper')
+
+enterButton.addEventListener('click', enter)
+leaderboardButton.addEventListener('click', leave)
+
+function enter() {
+    const enterError = document.querySelector('#enter-error-msg')
+    const playerName = document.querySelector('#player-name')
+
+    if (playerName.value.length < 5 || playerName.value.length > 50) {
+        enterError.classList.add('enter-error-msg-active')
+    } else {
+        enterError.classList.remove('enter-error-msg-active')
+        changeView('play')
+    }
+}
+
+function leave() {
+    changeView('leaderboard')
+}
+
+function changeView(target) {
+    if (target === 'play') {
+        leaderboardView.classList.add('hide-view-wrapper')
+        playView.classList.remove('hide-view-wrapper')
+    } else if (target === 'leaderboard') {
+        leaderboardView.classList.remove('hide-view-wrapper')
+        playView.classList.add('hide-view-wrapper')
+    }
+}
 
 function renderChoices() {
+    const choicesList = document.querySelector('#choices')
     const fragment = document.createDocumentFragment()
 
     for (const hand of hands) {

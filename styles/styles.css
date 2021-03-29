@@ -16,3 +16,15 @@ body {
 
 .choice-item {
 }
+
+.enter-error-msg {
+    opacity: 0;
+}
+
+.enter-error-msg-active {
+    opacity: 1;
+}
+
+.hide-view-wrapper {
+    display: none;
+}
