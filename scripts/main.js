@@ -4,24 +4,23 @@ import {hands, rock, paper, scissor} from "./choices.js";
 const playerHandFeedback = document.querySelector('#player-hand-feedback')
 const oppFeedback = document.querySelector('#opp-feedback')
 const feedback = document.querySelector('#feedback')
+const choicesList = document.querySelector('#choices-list')
 
-function renderOptions() {
-    const orderedList = document.querySelector('#selectionList')
+function renderChoices() {
     const fragment = document.createDocumentFragment()
 
     for (const hand of hands) {
-        const listItem = document.createElement('li')
-        listItem.setAttribute('class', 'choice-item')
+        const listItem = document.createElement('button')
         listItem.setAttribute('data-hand', hand.name)
-        listItem.addEventListener('click', picked)
+        listItem.addEventListener('click', userPick)
         const choiceTitle = document.createTextNode(hand.name)
         listItem.appendChild(choiceTitle)
         fragment.appendChild(listItem)
     }
-    orderedList.appendChild(fragment)
+    choicesList.appendChild(fragment)
 }
 
-function picked(click) {
+function userPick(click) {
     const hand = findHand(click.target.getAttribute('data-hand'))
     const opponent = aiPickHand()
     const result = hand.vs(opponent)
@@ -58,7 +57,7 @@ function finishRound(result, hand, opponent) {
     oppFeedback.textContent = opponent.name
 }
 
-renderOptions()
+renderChoices()
 
 /*
 console.log('isConnected:', isConnected());
