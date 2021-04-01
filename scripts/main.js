@@ -45,11 +45,11 @@ function renderChoices() {
     for (const hand of hands) {
         const listItem = document.createElement('button')
         listItem.setAttribute('data-hand', hand.name)
-        listItem.addEventListener('click', userPick)
         const choiceTitle = document.createTextNode(hand.name)
         listItem.appendChild(choiceTitle)
         fragment.appendChild(listItem)
     }
+    choicesList.addEventListener('click', userPick)
     choicesList.appendChild(fragment)
 }
 
