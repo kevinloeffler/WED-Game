@@ -16,7 +16,7 @@ function enter() {
     const enterError = document.querySelector('#enter-error-msg')
     const playerName = document.querySelector('#player-name')
 
-    if (playerName.value.length < 5 || playerName.value.length > 50) {
+    if (playerName.value.length < 3 || playerName.value.length > 50) {
         enterError.classList.add('enter-error-msg-active')
     } else {
         enterError.classList.remove('enter-error-msg-active')
