@@ -50,8 +50,13 @@ function leave() {
     player = null
 }
 
+function showPlayerName() {
+    document.querySelector('#pick-player-name').innerHTML = `PICK YOUR HAND ${player.nickname.toUpperCase()}`
+}
+
 function changeView(target) {
     if (target === 'play') {
+        showPlayerName()
         leaderboardView.classList.add('hide-view-wrapper')
         playView.classList.remove('hide-view-wrapper')
     } else if (target === 'leaderboard') {
