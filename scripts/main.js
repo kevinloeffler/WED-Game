@@ -50,13 +50,14 @@ function leave() {
     player = null
 }
 
-function showPlayerName() {
+function renderPlayerName() {
     document.querySelector('#pick-player-name').innerHTML = `PICK YOUR HAND ${player.nickname.toUpperCase()}`
 }
 
 function changeView(target) {
     if (target === 'play') {
-        showPlayerName()
+        renderPlayerName()
+        renderHistory()
         leaderboardView.classList.add('hide-view-wrapper')
         playView.classList.remove('hide-view-wrapper')
     } else if (target === 'leaderboard') {
@@ -98,6 +99,28 @@ function renderChoices() {
     }
     choicesList.addEventListener('click', userPick)
     choicesList.appendChild(fragment)
+}
+
+function renderHistory() {
+    const historyList = document.querySelector('#history-list')
+    const fragment = document.createDocumentFragment()
+    let counter = 6
+
+    for (const r of player.history.reverse()) {
+        if (!counter) break
+        const listItem = document.createElement('div')
+        listItem.setAttribute('class', 'history-list-item')
+        const result = document.createElement('p')
+        result.innerText = r.result
+        const playerPick = document.createElement('p')
+        playerPick.innerText = r.player.name
+        const aiPick = document.createElement('p')
+        aiPick.innerText = r.ai.name
+        listItem.appendChild(playerPick).appendChild(result).appendChild(aiPick)
+        fragment.appendChild(listItem)
+        counter--
+    }
+    historyList.appendChild(fragment)
 }
 
 function userPick(click) {
