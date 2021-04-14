@@ -112,6 +112,18 @@ function finishRound(result, hand, opponent) {
 
 renderChoices()
 
+// Debug
+function debug(e) {
+    if (e.key === 'p' && e.ctrlKey) {
+        console.log('=====DEBUG=====')
+        console.log('player:')
+        console.log(player)
+        console.log('leaderboard:')
+        console.log(leaderboard.localPlayers)
+    }
+}
+document.addEventListener("keyup", debug)
+
 /*
 console.log('isConnected:', isConnected());
 
