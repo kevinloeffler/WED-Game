@@ -2,10 +2,12 @@ export class Player {
 
     nickname
     score
+    isFake
     history = []
 
-    constructor(nickname, score = 0) {
+    constructor(nickname, isFake, score = 0) {
         this.nickname = nickname
+        this.isFake = isFake
         this.score = score
     }
 
