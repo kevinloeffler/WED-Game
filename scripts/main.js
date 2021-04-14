@@ -1,4 +1,4 @@
-import {hands, rock, paper, scissor} from "./choices.js";
+import {hands} from "./choices.js";
 import {Player} from "./player.js";
 import {leaderboard} from "./leaderboard.js";
 import {RoundResult} from "./roundResult.js";
