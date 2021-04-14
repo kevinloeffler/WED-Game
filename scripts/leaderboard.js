@@ -24,13 +24,11 @@ export const leaderboard = {
     checkPlayerName: function(name, mode) {
         // check mode in the future
         for (const player of this.localPlayers) {
-            console.log(player)
             if (player.nickname === name) {
                 return player
-            } else {
-                return null
             }
         }
+        return null
     }
 
 }

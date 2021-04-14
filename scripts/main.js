@@ -3,14 +3,13 @@ import {Player} from "./player.js";
 import {leaderboard} from "./leaderboard.js";
 
 // Init
-let activePlayer = null
 const player1 = new Player('player1', true, 10)
 const player2 = new Player('player2', true, 6)
-leaderboard.addPlayer(activePlayer, 0)
 leaderboard.addPlayer(player1, 0)
 leaderboard.addPlayer(player2, 0)
+let player = null
 
-// Assign often used elements
+// Assign often used html elements
 const playerHandFeedback = document.querySelector('#player-hand-feedback')
 const oppFeedback = document.querySelector('#opp-feedback')
 const feedback = document.querySelector('#feedback')
@@ -30,12 +29,15 @@ function enter() {
         enterError.classList.add('enter-error-msg-active')
     } else {
         enterError.classList.remove('enter-error-msg-active')
-        if (leaderboard.checkPlayerName(playerName.value)) {
+        const playerRequestingEnter = leaderboard.checkPlayerName(playerName.value, 0)
+        if (playerRequestingEnter) {
             console.log('entered as existing player')
-            // implement player tracking
+            player = playerRequestingEnter
         } else {
             console.log('created new player')
-            activePlayer = new Player(playerName.value, false)
+            player = new Player(playerName.value, false)
+            leaderboard.addPlayer(player, 0)
+            console.log(leaderboard.localPlayers)
         }
         changeView('play')
     }
@@ -43,6 +45,7 @@ function enter() {
 
 function leave() {
     changeView('leaderboard')
+    player = null
 }
 
 function changeView(target) {
