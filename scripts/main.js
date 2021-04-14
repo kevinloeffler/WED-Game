@@ -1,4 +1,14 @@
 import {hands, rock, paper, scissor} from "./choices.js";
+import {Player} from "./player.js";
+import {leaderboard} from "./leaderboard.js";
+
+// Init
+let activePlayer = null
+const player1 = new Player('player1', true, 10)
+const player2 = new Player('player2', true, 6)
+leaderboard.addPlayer(activePlayer, 0)
+leaderboard.addPlayer(player1, 0)
+leaderboard.addPlayer(player2, 0)
 
 // Assign often used elements
 const playerHandFeedback = document.querySelector('#player-hand-feedback')
@@ -20,6 +30,13 @@ function enter() {
         enterError.classList.add('enter-error-msg-active')
     } else {
         enterError.classList.remove('enter-error-msg-active')
+        if (leaderboard.checkPlayerName(playerName.value)) {
+            console.log('entered as existing player')
+            // implement player tracking
+        } else {
+            console.log('created new player')
+            activePlayer = new Player(playerName.value, false)
+        }
         changeView('play')
     }
 }
