@@ -6,8 +6,10 @@ import {RoundResult} from "./roundResult.js";
 // Init
 const player1 = new Player('player1', true, 10)
 const player2 = new Player('player2', true, 6)
+const player3 = new Player('player3', true, 8)
 leaderboard.addPlayer(player1, 0)
 leaderboard.addPlayer(player2, 0)
+leaderboard.addPlayer(player3, 0)
 let player = null
 
 // Assign often used html elements
@@ -53,9 +55,29 @@ function changeView(target) {
         leaderboardView.classList.add('hide-view-wrapper')
         playView.classList.remove('hide-view-wrapper')
     } else if (target === 'leaderboard') {
+        renderLeaderboard()
         leaderboardView.classList.remove('hide-view-wrapper')
         playView.classList.add('hide-view-wrapper')
     }
+}
+
+function renderLeaderboard() {
+    const leaderboardList = document.querySelector('#leaderboard')
+    const fragment = document.createDocumentFragment()
+    leaderboardList.innerHTML = ''
+    const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
+    for (const p of sorted) {
+        const pName = document.createElement('div')
+        const pNameText = document.createTextNode(p.nickname)
+        pName.appendChild(pNameText)
+        const pScore = document.createElement("div")
+        const pScoreText = document.createTextNode(p.score)
+        pScore.appendChild(pScoreText)
+        pScore.setAttribute('class', 'leaderboard-score')
+        fragment.appendChild(pName)
+        fragment.appendChild(pScore)
+    }
+    leaderboardList.appendChild(fragment)
 }
 
 function renderChoices() {
@@ -111,11 +133,13 @@ function finishRound(roundResult, hand, opponent) {
             break
     }
     player.addToHistory(result)
+    // TODO: Update points
     playerHandFeedback.textContent = hand.name
     oppFeedback.textContent = opponent.name
 }
 
 renderChoices()
+renderLeaderboard()
 
 // Debug
 function debug(e) {
