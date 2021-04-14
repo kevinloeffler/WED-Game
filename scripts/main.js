@@ -58,6 +58,7 @@ function changeView(target) {
     if (target === 'play') {
         renderPlayerName()
         renderHistory()
+        renderScore(player.score)
         leaderboardView.classList.add('hide-view-wrapper')
         playView.classList.remove('hide-view-wrapper')
     } else if (target === 'leaderboard') {
@@ -105,6 +106,7 @@ function renderHistory() {
     const historyList = document.querySelector('#history-list')
     const fragment = document.createDocumentFragment()
     let counter = 6
+    historyList.innerHTML = ''
 
     for (const r of player.history.reverse()) {
         if (!counter) break
@@ -121,6 +123,10 @@ function renderHistory() {
         counter--
     }
     historyList.appendChild(fragment)
+}
+
+function renderScore(newScore) {
+    document.querySelector('#score-count').innerText = newScore
 }
 
 function userPick(click) {
@@ -161,7 +167,8 @@ function finishRound(roundResult, hand, opponent) {
             break
     }
     player.addToHistory(result)
-    // TODO: Update points
+    renderHistory()
+    renderScore(player.score)
     playerHandFeedback.textContent = hand.name
     oppFeedback.textContent = opponent.name
 }
