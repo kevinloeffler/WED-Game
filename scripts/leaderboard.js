@@ -29,6 +29,15 @@ export const leaderboard = {
             }
         }
         return null
+    },
+
+    sortPlayers: function(a, b) {
+        if (a.score < b.score) {
+            return 1
+        } else if (a.score > b.score) {
+            return -1
+        }
+        return 0
     }
 
 }
