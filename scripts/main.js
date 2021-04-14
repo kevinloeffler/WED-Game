@@ -1,6 +1,7 @@
 import {hands, rock, paper, scissor} from "./choices.js";
 import {Player} from "./player.js";
 import {leaderboard} from "./leaderboard.js";
+import {RoundResult} from "./roundResult.js";
 
 // Init
 const player1 = new Player('player1', true, 10)
@@ -37,7 +38,6 @@ function enter() {
             console.log('created new player')
             player = new Player(playerName.value, false)
             leaderboard.addPlayer(player, 0)
-            console.log(leaderboard.localPlayers)
         }
         changeView('play')
     }
@@ -90,22 +90,27 @@ function aiPickHand() {
     return hands[Math.floor(Math.random() * hands.length)]
 }
 
-function finishRound(result, hand, opponent) {
-    switch (result) {
+function finishRound(roundResult, hand, opponent) {
+    let result = null
+    switch (roundResult) {
         case 1:
+            result = new RoundResult('Win', hand, opponent)
+            player.addWin()
             feedback.textContent = 'Congrats, you won!'
-            // TODO add point
             console.log('Round won')
             break
         case -1:
+            result = new RoundResult('Loss', hand, opponent)
             feedback.textContent = 'Oh no, you lost.'
             console.log('Round lost')
             break
         case 0:
+            result = new RoundResult('Tie', hand, opponent)
             feedback.textContent = 'Its a tie.'
             console.log('Round tied')
             break
     }
+    player.addToHistory(result)
     playerHandFeedback.textContent = hand.name
     oppFeedback.textContent = opponent.name
 }
