@@ -1,13 +1,10 @@
 /* Remove default styles */
 * {
     font: inherit;
-}
-
-a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
     margin: 0;
     padding: 0;
     border: 0;
-    vertical-align:baseline
+    vertical-align: baseline;
 }
 
 /* Typography */
@@ -29,12 +26,12 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
 :root {
     --for-color: #fff;
     --bkg-color: #101324;
-    --acc-orange: #FF8A59;
-    --acc-pink: #ED417B;
+    --acc-orange: #ff8a59;
+    --acc-pink: #ed417b;
     --acc-blue: #252851;
     --passive-gray: #626572;
     --gradient: linear-gradient(0deg, var(--acc-pink) 0%, var(--acc-orange) 100%);
-    --gradient-text: linear-gradient(0deg, #E6059E 10%, #FBB634 90%);
+    --gradient-text: linear-gradient(0deg, #e6059e 10%, #fbb634 90%);
 }
 
 ::selection {
@@ -56,7 +53,7 @@ body {
 
 /***** LEADERBOARD *****/
 
-/* Leaderboard*/
+/* Leaderboard */
 
 .leaderboard-wrapper {}
 
@@ -233,7 +230,7 @@ button:focus {
     padding: 10px 16px 16px;
     border-radius: 10px;
     border: 2px solid var(--acc-blue);
-    filter: drop-shadow(0px 0px 6px var(--acc-blue)) drop-shadow(0px 0px 4px var(--acc-blue));
+    filter: drop-shadow(0 0 6px var(--acc-blue)) drop-shadow(0 0 4px var(--acc-blue));
 }
 
 .score-text {
