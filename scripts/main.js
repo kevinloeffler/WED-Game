@@ -57,6 +57,7 @@ function renderPlayerName() {
 function changeView(target) {
     if (target === 'play') {
         renderPlayerName()
+        renderStartGameMsg()
         renderHistory()
         renderScore(player.score)
         leaderboardView.classList.add('hide-view-wrapper')
@@ -104,6 +105,17 @@ function renderChoices() {
     }
     choicesList.addEventListener('click', userPick)
     choicesList.appendChild(fragment)
+}
+
+function renderStartGameMsg() {
+    document.querySelector('#start-game-msg').classList.remove('feedback-hidden')
+    document.querySelector('#feedback-msg').classList.add('feedback-hidden')
+    feedback.textContent = 'Good luck'
+}
+
+function renderRoundFeedbackMsg() {
+    document.querySelector('#start-game-msg').classList.add('feedback-hidden')
+    document.querySelector('#feedback-msg').classList.remove('feedback-hidden')
 }
 
 function renderHistory() {
@@ -176,6 +188,7 @@ function finishRound(roundResult, hand, opponent) {
     player.addToHistory(result)
     renderHistory()
     renderScore(player.score)
+    renderRoundFeedbackMsg()
     playerHandFeedback.textContent = hand.name
     oppFeedback.textContent = opponent.name
 }
