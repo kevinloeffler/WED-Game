@@ -203,8 +203,15 @@ function finishRound(roundResult, hand, opponent) {
     oppFeedback.textContent = opponent.name
 }
 
+function choicesHandleEnter(key) {
+    if (key.keyCode === 13) {
+        document.activeElement.click()
+    }
+}
+
 renderChoices()
 renderLeaderboard()
+document.addEventListener('keyup', choicesHandleEnter)
 
 // Debug
 function debug(e) {
