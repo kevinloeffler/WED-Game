@@ -49,6 +49,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 40px;
 }
 
 /***** LEADERBOARD *****/
@@ -253,6 +254,10 @@ button:focus {
 }
 
 /* Feedback */
+
+.feedback {
+    margin-bottom: 20px;
+}
 
 .feedback span {
     color: var(--acc-pink);
