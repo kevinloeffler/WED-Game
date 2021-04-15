@@ -1,13 +1,15 @@
 class Choice {
 
     name
+    icon
     loses = []
     wins = []
 
-    constructor(name, loses, wins) {
+    constructor(name, loses, wins, icon) {
         this.name = name
         this.loses = loses
         this.wins = wins
+        this.icon = icon
     }
 
     get name() {
@@ -26,10 +28,10 @@ class Choice {
 
 }
 
-export const rock = new Choice('rock', [], [])
-export const paper = new Choice('paper', [], [])
-export const scissor = new Choice('scissor', [], [])
-export const emptyHand = new Choice('&nbsp', [], [])
+export const rock = new Choice('rock', [], [], './assets/images/Rock.svg')
+export const paper = new Choice('paper', [], [], './assets/images/Paper.svg')
+export const scissor = new Choice('scissor', [], [], './assets/images/Scissor.svg')
+export const emptyHand = new Choice('&nbsp', [], [], '')
 
 export const hands = [rock, paper, scissor]
 
