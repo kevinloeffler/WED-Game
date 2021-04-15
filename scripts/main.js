@@ -74,15 +74,19 @@ function renderLeaderboard() {
     leaderboardList.innerHTML = ''
     const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
     for (const p of sorted) {
+        const listItem = document.createElement('div')
+        listItem.setAttribute('class', 'leaderboard-item')
         const pName = document.createElement('div')
         const pNameText = document.createTextNode(p.nickname)
         pName.appendChild(pNameText)
+        pName.setAttribute('class', 'leaderboard-player')
         const pScore = document.createElement("div")
-        const pScoreText = document.createTextNode(p.score)
+        const pScoreText = document.createTextNode(p.score + ' Points')
         pScore.appendChild(pScoreText)
         pScore.setAttribute('class', 'leaderboard-score')
-        fragment.appendChild(pName)
-        fragment.appendChild(pScore)
+        listItem.appendChild(pName)
+        listItem.appendChild(pScore)
+        fragment.appendChild(listItem)
     }
     leaderboardList.appendChild(fragment)
 }
