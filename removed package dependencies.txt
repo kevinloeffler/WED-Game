@@ -1,1 +1,0 @@
-"@web-and-design/eslint-plugin-wed": "^1.0.0",
