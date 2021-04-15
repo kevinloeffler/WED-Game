@@ -44,12 +44,12 @@ body {
     font-size: 22px;
     color: var(--for-color);
     background-color: var(--bkg-color);
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 5vh 0;
 }
 
 /***** LEADERBOARD *****/
