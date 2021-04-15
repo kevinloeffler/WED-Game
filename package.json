@@ -21,6 +21,7 @@
     "stylelint-config-standard": "^21.0.0"
   },
   "dependencies": {
+    "@web-and-design/eslint-plugin-wed": "^1.0.0",
     "html-validator-cli": "^7.0.1"
   }
 }
