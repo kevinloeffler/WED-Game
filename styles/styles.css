@@ -204,7 +204,52 @@ button:focus {
 
 /* Hands */
 
+#choices {
+    display: flex;
+    padding: 40px 0;
+}
+
 .choice-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 200px;
+    color: var(--acc-orange);
+    cursor: pointer;
+}
+
+.choice-item:focus {
+    outline: none;
+    color: white;
+}
+
+.choice-item:focus .choice-shadow {
+    opacity: 1;
+}
+
+.choice-icon {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+
+.choice-shadow {
+    position: absolute;
+    top: -20%;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(#1e2448, var(--bkg-color));
+    border-radius: 100%;
+    filter: blur(20px);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.5;
+    transition: opacity 250ms;
+}
+
+.choice-item:hover .choice-shadow {
+    opacity: 1;
 }
 
 /* Feedback */
