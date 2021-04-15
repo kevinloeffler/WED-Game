@@ -4,9 +4,9 @@ import {leaderboard} from "./leaderboard.js";
 import {RoundResult} from "./roundResult.js";
 
 // Init
-const player1 = new Player('player1', true, 10)
-const player2 = new Player('player2', true, 6)
-const player3 = new Player('player3', true, 8)
+const player1 = new Player('Marty McFly', true, 11)
+const player2 = new Player('Axel Foley', true, 2)
+const player3 = new Player('Ferris Bueller', true, 5)
 leaderboard.addPlayer(player1, 0)
 leaderboard.addPlayer(player2, 0)
 leaderboard.addPlayer(player3, 0)
