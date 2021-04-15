@@ -220,6 +220,10 @@ button:focus {
     color: var(--acc-orange);
 }
 
+.feedback-hidden {
+    display: none;
+}
+
 /* Score */
 
 .score-wrapper {
