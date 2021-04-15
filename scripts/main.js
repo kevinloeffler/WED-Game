@@ -109,22 +109,25 @@ function renderChoices() {
 function renderHistory() {
     const historyList = document.querySelector('#history-list')
     const fragment = document.createDocumentFragment()
-    let counter = 6
+    const arr = player.history
     historyList.innerHTML = ''
 
-    for (const r of player.history.reverse()) {
-        if (!counter) break
+    for (let i = 0; i < 6; i++) {
         const listItem = document.createElement('div')
         listItem.setAttribute('class', 'history-list-item')
+
         const result = document.createElement('p')
-        result.innerText = r.result
         const playerPick = document.createElement('p')
-        playerPick.innerText = r.player.name
         const aiPick = document.createElement('p')
-        aiPick.innerText = r.ai.name
-        listItem.appendChild(playerPick).appendChild(result).appendChild(aiPick)
+
+        result.innerHTML = arr[i].result
+        playerPick.innerHTML = arr[i].player.name
+        aiPick.innerHTML = arr[i].ai.name
+
+        listItem.appendChild(playerPick)
+        listItem.appendChild(result)
+        listItem.appendChild(aiPick)
         fragment.appendChild(listItem)
-        counter--
     }
     historyList.appendChild(fragment)
 }
