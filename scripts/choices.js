@@ -29,6 +29,7 @@ class Choice {
 export const rock = new Choice('rock', [], [])
 export const paper = new Choice('paper', [], [])
 export const scissor = new Choice('scissor', [], [])
+export const emptyHand = new Choice('&nbsp', [], [])
 
 export const hands = [rock, paper, scissor]
 
