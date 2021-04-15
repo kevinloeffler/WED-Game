@@ -56,8 +56,6 @@ body {
 
 /* Leaderboard */
 
-.leaderboard-wrapper {}
-
 h1 {
     font-family: "Road Rage", sans-serif;
     font-size: 80px;
@@ -221,20 +219,6 @@ button:focus {
     cursor: pointer;
 }
 
-.choice-item:focus {
-    outline: none;
-    color: white;
-}
-
-.choice-item:focus .choice-shadow {
-    opacity: 1;
-}
-
-.choice-icon {
-    margin-bottom: 40px;
-    pointer-events: none;
-}
-
 .choice-shadow {
     position: absolute;
     top: -20%;
@@ -247,6 +231,20 @@ button:focus {
     z-index: -1;
     opacity: 0.5;
     transition: opacity 250ms;
+}
+
+.choice-item:focus {
+    outline: none;
+    color: white;
+}
+
+.choice-item:focus .choice-shadow {
+    opacity: 1;
+}
+
+.choice-icon {
+    margin-bottom: 40px;
+    pointer-events: none;
 }
 
 .choice-item:hover .choice-shadow {
