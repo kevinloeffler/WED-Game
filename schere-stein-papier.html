@@ -12,24 +12,28 @@
     <script src="scripts/main.js" type="module"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>-->
 </head>
-<body>
+<body id="body">
 
 <section class="leaderboard-wrapper">
     <h1>Leaderboard</h1>
+    <div class="leaderboard-menu-bar">
+        <p class="leaderboard-labels leaderboard-label-left">PLAYER</p>
+        <p class="leaderboard-labels">SCORE</p>
+    </div>
     <div id="leaderboard">
         <!-- dynamically created -->
     </div>
     <div class="enter-wrapper">
         <label for="player-name">WANT TO PLAY?</label>
-        <input type="text" id="player-name">
+        <input type="text" id="player-name" placeholder="Enter your name">
         <button id="enter-button">PLAY GAME</button>
-        <p class="enter-error-msg" id="enter-error-msg">Enter a name between 3 and 50 characters</p>
+        <p class="enter-error-msg" id="enter-error-msg">Enter a name between 3 and 20 characters</p>
     </div>
-    <div class="credits">
-        DESIGNED AND DEVELOPED BY KEVIN LOEFFLER
-        WEBDESIGN AND ENGINEERING 1, PROF. MARKUS STOLZE
+    <p class="credits">
+        DESIGNED AND DEVELOPED BY KEVIN LOEFFLER<br>
+        WEBDESIGN AND ENGINEERING 1, PROF. MARKUS STOLZE<br>
         EAST SWITZERLAND UNIVERSITY OF APPLIED SCIENCE
-    </div>
+    </p>
 </section>
 
 <section class="play-wrapper hide-view-wrapper">

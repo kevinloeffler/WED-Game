@@ -1,5 +1,16 @@
-/* Global Variables */
+/* Remove default styles */
+* {
+    font: inherit;
+}
 
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align:baseline
+}
+
+/* Typography */
 @font-face {
     font-family: 'Road Rage';
     src: url('../assets/typography/Road_Rage.woff2') format('woff2');
@@ -9,38 +20,177 @@
 
 @font-face {
     font-family: 'Noto Sans JP';
-    src: url('../assets/typography/NotoSansJP-Bold.woff2');
+    src: url('../assets/typography/NotoSansJP-700.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
 }
 
+/* Global Variables */
 :root {
     --for-color: #fff;
     --bkg-color: #101324;
     --acc-orange: #FF8A59;
     --acc-pink: #ED417B;
     --acc-blue: #252851;
+    --passive-gray: #626572;
+    --gradient: linear-gradient(0deg, var(--acc-pink) 0%, var(--acc-orange) 100%);
+    --gradient-text: linear-gradient(0deg, #E6059E 10%, #FBB634 90%);
+}
+
+::selection {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 body {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'Noto Sans JP', 'Helvetica Neue', serif;
+    font-weight: 700;
+    font-size: 22px;
     color: var(--for-color);
     background-color: var(--bkg-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+/***** LEADERBOARD *****/
+
+/* Leaderboard*/
+
+.leaderboard-wrapper {}
 
 h1 {
     font-family: "Road Rage", sans-serif;
+    font-size: 80px;
+    text-align: center;
+    margin-bottom: 40px;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0 30px;
 }
 
-.choice-item {
+.leaderboard-menu-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.leaderboard-labels {
+    width: 49%;
+    font-size: 11px;
+    color: var(--passive-gray);
+}
+
+.leaderboard-label-left {
+    text-align: right;
+}
+
+#leaderboard {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+}
+
+.leaderboard-player {
+    width: 49%;
+    color: var(--acc-orange);
+    text-align: right;
+}
+
+.leaderboard-score {
+    width: 49%;
+    color: var(--acc-pink);
+    text-align: left;
+}
+
+/* Enter */
+
+.enter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.enter-wrapper label {
+    font-size: 11px;
+    color: var(--passive-gray);
+}
+
+input[type='text'] {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 22px;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 4px;
+}
+
+input[type='text']:hover {
+    background-color: #282a40;
+}
+
+input[type='text']:focus {
+    background-color: #282a40;
+    outline: none;
+}
+
+input[type='text']::placeholder {
+    font-size: 22px;
+    color: white;
+}
+
+button {
+    font-size: 12px;
+    color: var(--bkg-color);
+    background: var(--gradient);
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: solid var(--bkg-color) 2px;
+    transition: color 200ms;
+}
+
+button:hover {
+    color: white;
+}
+
+button:focus {
+    outline: none;
+    border: solid white 2px;
 }
 
 .enter-error-msg {
+    font-size: 12px;
+    margin-top: 12px;
+    color: var(--acc-pink);
     opacity: 0;
 }
 
 .enter-error-msg-active {
     opacity: 1;
+}
+
+/* Credits */
+
+.credits {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--passive-gray);
+    text-align: center;
+}
+
+/***** PLAY *****/
+
+.choice-item {
 }
 
 .hide-view-wrapper {
