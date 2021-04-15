@@ -190,9 +190,102 @@ button:focus {
 
 /***** PLAY *****/
 
-.choice-item {
+.play-wrapper {
+    position: relative;
+    text-align: center;
+    min-width: 500px;
 }
 
 .hide-view-wrapper {
     display: none;
+}
+
+#pick-player-name {
+    font-size: 11px;
+    color: var(--passive-gray);
+}
+
+/* Hands */
+
+.choice-item {
+}
+
+/* Feedback */
+
+.feedback span {
+    color: var(--acc-pink);
+}
+
+.feedback span:first-of-type {
+    color: var(--acc-orange);
+}
+
+/* Score */
+
+.score-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 16px 16px;
+    border-radius: 10px;
+    border: 2px solid var(--acc-blue);
+    filter: drop-shadow(0px 0px 6px var(--acc-blue)) drop-shadow(0px 0px 4px var(--acc-blue));
+}
+
+.score-text {
+    font-size: 11px;
+    color: var(--passive-gray);
+}
+
+#score-count {
+    font-size: 60px;
+    line-height: 50px;
+    color: rgba(255, 255, 255, 0.001);
+    -webkit-text-stroke: 1px #c1c1c1;
+}
+
+/* History */
+
+#history-wrapper {
+    margin-top: 40px;
+}
+
+.history-menu-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.history-label {
+    font-size: 11px;
+    min-width: 90px;
+    color: var(--passive-gray);
+}
+
+.history-label:nth-child(1) {
+    text-align: right;
+}
+
+.history-label:nth-child(3) {
+    text-align: left;
+}
+
+.history-list-item {
+    display: flex;
+    justify-content: center;
+    text-transform: capitalize;
+}
+
+.history-list-item p {
+    width: 90px;
+}
+
+.history-list-item p:nth-child(1) {
+    color: var(--acc-orange);
+    text-align: right;
+}
+
+.history-list-item p:nth-child(3) {
+    color: var(--acc-pink);
+    text-align: left;
 }
