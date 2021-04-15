@@ -1,5 +1,19 @@
 /* Global Variables */
 
+@font-face {
+    font-family: 'Road Rage';
+    src: url('../assets/typography/Road_Rage.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Sans JP';
+    src: url('../assets/typography/NotoSansJP-Bold.woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 :root {
     --for-color: #fff;
     --bkg-color: #101324;
@@ -12,6 +26,10 @@ body {
     font-family: 'Noto Sans JP', sans-serif;
     color: var(--for-color);
     background-color: var(--bkg-color);
+}
+
+h1 {
+    font-family: "Road Rage", sans-serif;
 }
 
 .choice-item {
