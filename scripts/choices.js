@@ -17,12 +17,10 @@ class Choice {
     }
 }
 
-export const rock = new Choice('rock', [], [], './assets/images/Rock.svg')
-export const paper = new Choice('paper', [], [], './assets/images/Paper.svg')
-export const scissor = new Choice('scissor', [], [], './assets/images/Scissor.svg')
+const rock = new Choice('rock', [], [], './assets/images/Rock.svg')
+const paper = new Choice('paper', [], [], './assets/images/Paper.svg')
+const scissor = new Choice('scissor', [], [], './assets/images/Scissor.svg')
 export const emptyHand = new Choice('&nbsp', [], [], '')
-
-export const hands = [rock, paper, scissor]
 
 rock.wins = [scissor]
 rock.loses = [paper]
@@ -30,3 +28,5 @@ paper.wins = [rock]
 paper.loses = [scissor]
 scissor.wins = [paper]
 scissor.loses = [rock]
+
+export const hands = [rock, paper, scissor]
