@@ -18,11 +18,11 @@ class Choice {
 
     vs(opponent) {
         if (this.loses.includes(opponent)) {
-            return -1 // Lost
+            return -1
         } else if (this.wins.includes(opponent)) {
-            return 1 // Won
+            return 1
         } else {
-            return 0 // Tie
+            return 0
         }
     }
 
