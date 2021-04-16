@@ -1,10 +1,4 @@
 class Choice {
-
-    name
-    icon
-    loses = []
-    wins = []
-
     constructor(name, loses, wins, icon) {
         this.name = name
         this.loses = loses
@@ -12,20 +6,15 @@ class Choice {
         this.icon = icon
     }
 
-    get name() {
-        return this.name
-    }
-
     vs(opponent) {
         if (this.loses.includes(opponent)) {
             return -1
-        } else if (this.wins.includes(opponent)) {
-            return 1
-        } else {
-            return 0
         }
+        if (this.wins.includes(opponent)) {
+            return 1
+        }
+        return 0
     }
-
 }
 
 export const rock = new Choice('rock', [], [], './assets/images/Rock.svg')
