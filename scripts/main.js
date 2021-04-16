@@ -1,7 +1,7 @@
-import {hands} from "./choices.js";
-import {Player} from "./player.js";
-import {leaderboard} from "./leaderboard.js";
-import {RoundResult} from "./roundResult.js";
+import {hands} from './choices.js'
+import {Player} from './player.js'
+import leaderboard from './leaderboard.js'
+import RoundResult from './roundResult.js'
 
 // Init
 const player1 = new Player('Marty McFly', true, 11)
@@ -21,37 +21,68 @@ const leaderboardButton = document.querySelector('#leaderboard-button')
 const leaderboardView = document.querySelector('.leaderboard-wrapper')
 const playView = document.querySelector('.play-wrapper')
 
-enterButton.addEventListener('click', enter)
-leaderboardButton.addEventListener('click', leave)
-
-function enter() {
-    const enterError = document.querySelector('#enter-error-msg')
-    const playerName = document.querySelector('#player-name')
-
-    if (playerName.value.length < 3 || playerName.value.length > 20) {
-        enterError.classList.add('enter-error-msg-active')
-    } else {
-        enterError.classList.remove('enter-error-msg-active')
-        const playerRequestingEnter = leaderboard.checkPlayerName(playerName.value, 0)
-        if (playerRequestingEnter) {
-            console.log('entered as existing player')
-            player = playerRequestingEnter
-        } else {
-            console.log('created new player')
-            player = new Player(playerName.value, false)
-            leaderboard.addPlayer(player, 0)
-        }
-        changeView('play')
-    }
-}
-
-function leave() {
-    changeView('leaderboard')
-    player = null
-}
-
 function renderPlayerName() {
     document.querySelector('#pick-player-name').innerHTML = `PICK YOUR HAND ${player.nickname.toUpperCase()}`
+}
+
+function renderLeaderboard() {
+    const leaderboardList = document.querySelector('#leaderboard')
+    let fragment = ''
+    leaderboardList.innerHTML = ''
+    const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
+    for (const p of sorted) {
+        const pName = `<div class="leaderboard-player">${p.nickname}</div>`
+        const pScore = `<div class="leaderboard-score">${p.score} Points</div>`
+        const listItem = `<div class="leaderboard-item">${pName}${pScore}</div>`
+        fragment += listItem
+    }
+    leaderboardList.innerHTML = fragment
+}
+
+function renderChoices() {
+    const choicesList = document.querySelector('#choices')
+    let fragment = ''
+
+    for (const hand of hands) {
+        const choiceShadow = `<div class="choice-shadow"></div>`
+        const choiceIcon = `<img class="choice-icon" src="${hand.icon}" alt="${hand.name}">`
+        const button = `<div class="choice-item" data-hand="${hand.name}" tabindex="0" role="button">${choiceIcon}${hand.name}${choiceShadow}</div>`
+        fragment += button
+    }
+    choicesList.addEventListener('click', userPick)
+    choicesList.innerHTML = fragment
+}
+
+function renderStartGameMsg() {
+    document.querySelector('#start-game-msg').classList.remove('feedback-hidden')
+    document.querySelector('#feedback-msg').classList.add('feedback-hidden')
+    feedback.textContent = 'Good luck'
+}
+
+function renderRoundFeedbackMsg() {
+    document.querySelector('#start-game-msg').classList.add('feedback-hidden')
+    document.querySelector('#feedback-msg').classList.remove('feedback-hidden')
+}
+
+function renderHistory() {
+    const historyList = document.querySelector('#history-list')
+    let fragment = ''
+    const arr = player.history
+    historyList.innerHTML = ''
+
+    for (let i = 0; i < 6; i++) {
+
+        const result = `<p>${arr[i].result}</p>`
+        const playerPick = `<p>${arr[i].player.name}</p>`
+        const aiPick = `<p>${arr[i].ai.name}</p>`
+        const listItem = `<div class="history-list-item">${playerPick}${result}${aiPick}</div>`
+        fragment += listItem
+    }
+    historyList.innerHTML = fragment
+}
+
+function renderScore(newScore) {
+    document.querySelector('#score-count').innerText = newScore
 }
 
 function changeView(target) {
@@ -69,93 +100,28 @@ function changeView(target) {
     }
 }
 
-function renderLeaderboard() {
-    const leaderboardList = document.querySelector('#leaderboard')
-    const fragment = document.createDocumentFragment()
-    leaderboardList.innerHTML = ''
-    const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
-    for (const p of sorted) {
-        const listItem = document.createElement('div')
-        listItem.setAttribute('class', 'leaderboard-item')
-        const pName = document.createElement('div')
-        const pNameText = document.createTextNode(p.nickname)
-        pName.appendChild(pNameText)
-        pName.setAttribute('class', 'leaderboard-player')
-        const pScore = document.createElement("div")
-        const pScoreText = document.createTextNode(p.score + ' Points')
-        pScore.appendChild(pScoreText)
-        pScore.setAttribute('class', 'leaderboard-score')
-        listItem.appendChild(pName)
-        listItem.appendChild(pScore)
-        fragment.appendChild(listItem)
+function enter() {
+    const enterError = document.querySelector('#enter-error-msg')
+    const playerName = document.querySelector('#player-name')
+
+    if (playerName.value.length < 3 || playerName.value.length > 20) {
+        enterError.classList.add('enter-error-msg-active')
+    } else {
+        enterError.classList.remove('enter-error-msg-active')
+        const playerRequestingEnter = leaderboard.checkPlayerName(playerName.value, 0)
+        if (playerRequestingEnter) {
+            player = playerRequestingEnter
+        } else {
+            player = new Player(playerName.value, false)
+            leaderboard.addPlayer(player, 0)
+        }
+        changeView('play')
     }
-    leaderboardList.appendChild(fragment)
 }
 
-function renderChoices() {
-    const choicesList = document.querySelector('#choices')
-    const fragment = document.createDocumentFragment()
-
-    for (const hand of hands) {
-        const button = document.createElement('div')
-        button.setAttribute('data-hand', hand.name)
-        button.setAttribute('class', 'choice-item')
-        button.setAttribute('tabindex', '0')
-        button.setAttribute('role', 'button')
-        const choiceIcon = document.createElement('img')
-        choiceIcon.setAttribute('src', hand.icon)
-        choiceIcon.setAttribute('class', 'choice-icon')
-        button.appendChild(choiceIcon)
-        const choiceTitle = document.createTextNode(hand.name)
-        button.appendChild(choiceTitle)
-        const buttonShadow = document.createElement('div')
-        buttonShadow.setAttribute('class', 'choice-shadow')
-        button.appendChild(buttonShadow)
-        fragment.appendChild(button)
-    }
-    choicesList.addEventListener('click', userPick)
-    choicesList.appendChild(fragment)
-}
-
-function renderStartGameMsg() {
-    document.querySelector('#start-game-msg').classList.remove('feedback-hidden')
-    document.querySelector('#feedback-msg').classList.add('feedback-hidden')
-    feedback.textContent = 'Good luck'
-}
-
-function renderRoundFeedbackMsg() {
-    document.querySelector('#start-game-msg').classList.add('feedback-hidden')
-    document.querySelector('#feedback-msg').classList.remove('feedback-hidden')
-}
-
-function renderHistory() {
-    const historyList = document.querySelector('#history-list')
-    const fragment = document.createDocumentFragment()
-    const arr = player.history
-    historyList.innerHTML = ''
-
-    for (let i = 0; i < 6; i++) {
-        const listItem = document.createElement('div')
-        listItem.setAttribute('class', 'history-list-item')
-
-        const result = document.createElement('p')
-        const playerPick = document.createElement('p')
-        const aiPick = document.createElement('p')
-
-        result.innerHTML = arr[i].result
-        playerPick.innerHTML = arr[i].player.name
-        aiPick.innerHTML = arr[i].ai.name
-
-        listItem.appendChild(playerPick)
-        listItem.appendChild(result)
-        listItem.appendChild(aiPick)
-        fragment.appendChild(listItem)
-    }
-    historyList.appendChild(fragment)
-}
-
-function renderScore(newScore) {
-    document.querySelector('#score-count').innerText = newScore
+function leave() {
+    changeView('leaderboard')
+    player = null
 }
 
 function userPick(click) {
@@ -182,17 +148,14 @@ function finishRound(roundResult, hand, opponent) {
             result = new RoundResult('Win', hand, opponent)
             player.addWin()
             feedback.textContent = 'Congrats, you won!'
-            console.log('Round won')
             break
         case -1:
             result = new RoundResult('Loss', hand, opponent)
             feedback.textContent = 'Oh no, you lost.'
-            console.log('Round lost')
             break
         case 0:
             result = new RoundResult('Tie', hand, opponent)
             feedback.textContent = 'Its a tie.'
-            console.log('Round tied')
             break
     }
     player.addToHistory(result)
@@ -211,19 +174,9 @@ function choicesHandleEnter(key) {
 
 renderChoices()
 renderLeaderboard()
+enterButton.addEventListener('click', enter)
+leaderboardButton.addEventListener('click', leave)
 document.addEventListener('keyup', choicesHandleEnter)
-
-// Debug
-function debug(e) {
-    if (e.key === 'p' && e.ctrlKey) {
-        console.log('=====DEBUG=====')
-        console.log('player:')
-        console.log(player)
-        console.log('leaderboard:')
-        console.log(leaderboard.localPlayers)
-    }
-}
-document.addEventListener("keyup", debug)
 
 /*
 console.log('isConnected:', isConnected());
