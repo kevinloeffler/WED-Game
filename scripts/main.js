@@ -13,20 +13,28 @@ leaderboard.addPlayer(player3)
 let player = null
 
 // Assign often used html elements
+const leaderboardView = document.querySelector('.leaderboard-wrapper')
+const leaderboardList = document.querySelector('#leaderboard')
+const enterButton = document.querySelector('#enter-button')
+const enterError = document.querySelector('#enter-error-msg')
+const playerName = document.querySelector('#player-name')
+const playView = document.querySelector('.play-wrapper')
+const pickPlayerName = document.querySelector('#pick-player-name')
+const startGameMsg = document.querySelector('#start-game-msg')
+const feedbackMsg = document.querySelector('#feedback-msg')
+const choicesList = document.querySelector('#choices')
+const feedback = document.querySelector('#feedback')
 const playerHandFeedback = document.querySelector('#player-hand-feedback')
 const oppFeedback = document.querySelector('#opp-feedback')
-const feedback = document.querySelector('#feedback')
-const enterButton = document.querySelector('#enter-button')
 const leaderboardButton = document.querySelector('#leaderboard-button')
-const leaderboardView = document.querySelector('.leaderboard-wrapper')
-const playView = document.querySelector('.play-wrapper')
+const historyList = document.querySelector('#history-list')
+const scoreCount = document.querySelector('#score-count')
 
 function renderPlayerName() {
-    document.querySelector('#pick-player-name').innerHTML = `PICK YOUR HAND ${player.nickname.toUpperCase()}`
+    pickPlayerName.innerHTML = `PICK YOUR HAND ${player.nickname.toUpperCase()}`
 }
 
 function renderLeaderboard() {
-    const leaderboardList = document.querySelector('#leaderboard')
     let fragment = ''
     leaderboardList.innerHTML = ''
     const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
@@ -41,7 +49,6 @@ function renderLeaderboard() {
 }
 
 function renderChoices() {
-    const choicesList = document.querySelector('#choices')
     let fragment = ''
     // eslint-disable-next-line no-restricted-syntax
     for (const hand of hands) {
@@ -55,18 +62,17 @@ function renderChoices() {
 }
 
 function renderStartGameMsg() {
-    document.querySelector('#start-game-msg').classList.remove('feedback-hidden')
-    document.querySelector('#feedback-msg').classList.add('feedback-hidden')
+    startGameMsg.classList.remove('feedback-hidden')
+    feedbackMsg.classList.add('feedback-hidden')
     feedback.textContent = 'Good luck'
 }
 
 function renderRoundFeedbackMsg() {
-    document.querySelector('#start-game-msg').classList.add('feedback-hidden')
-    document.querySelector('#feedback-msg').classList.remove('feedback-hidden')
+    startGameMsg.classList.add('feedback-hidden')
+    feedbackMsg.classList.remove('feedback-hidden')
 }
 
 function renderHistory() {
-    const historyList = document.querySelector('#history-list')
     let fragment = ''
     const arr = player.history
     historyList.innerHTML = ''
@@ -82,7 +88,7 @@ function renderHistory() {
 }
 
 function renderScore(newScore) {
-    document.querySelector('#score-count').innerText = newScore
+    scoreCount.innerText = newScore
 }
 
 function changeView(target) {
@@ -101,9 +107,6 @@ function changeView(target) {
 }
 
 function enter() {
-    const enterError = document.querySelector('#enter-error-msg')
-    const playerName = document.querySelector('#player-name')
-
     if (playerName.value.length < 3 || playerName.value.length > 20) {
         enterError.classList.add('enter-error-msg-active')
     } else {
