@@ -7,9 +7,9 @@ import {aiPickHand, evaluateHand, findHand} from "./game-service.js";
 const player1 = new Player('Marty McFly', true, 11)
 const player2 = new Player('Axel Foley', true, 2)
 const player3 = new Player('Ferris Bueller', true, 5)
-leaderboard.addPlayer(player1, 0)
-leaderboard.addPlayer(player2, 0)
-leaderboard.addPlayer(player3, 0)
+leaderboard.addPlayer(player1)
+leaderboard.addPlayer(player2)
+leaderboard.addPlayer(player3)
 let player = null
 
 // Assign often used html elements
@@ -107,12 +107,12 @@ function enter() {
         enterError.classList.add('enter-error-msg-active')
     } else {
         enterError.classList.remove('enter-error-msg-active')
-        const playerRequestingEnter = leaderboard.checkPlayerName(playerName.value, 0)
+        const playerRequestingEnter = leaderboard.checkPlayerName(playerName.value)
         if (playerRequestingEnter) {
             player = playerRequestingEnter
         } else {
             player = new Player(playerName.value, false)
-            leaderboard.addPlayer(player, 0)
+            leaderboard.addPlayer(player)
         }
         changeView('play')
     }
