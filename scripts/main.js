@@ -1,7 +1,7 @@
 import {hands} from './choices.js'
-import {Player} from './player.js'
+import Player from './player.js'
 import leaderboard from './leaderboard.js'
-import {aiPickHand, evaluateHand, findHand} from "./game-service.js";
+import {aiPickHand, evaluateHand, findHand} from './game-service.js'
 
 // Init
 const player1 = new Player('Marty McFly', true, 11)
@@ -30,6 +30,7 @@ function renderLeaderboard() {
     let fragment = ''
     leaderboardList.innerHTML = ''
     const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
+    // eslint-disable-next-line no-restricted-syntax
     for (const p of sorted) {
         const pName = `<div class="leaderboard-player">${p.nickname}</div>`
         const pScore = `<div class="leaderboard-score">${p.score} Points</div>`
@@ -42,9 +43,9 @@ function renderLeaderboard() {
 function renderChoices() {
     const choicesList = document.querySelector('#choices')
     let fragment = ''
-
+    // eslint-disable-next-line no-restricted-syntax
     for (const hand of hands) {
-        const choiceShadow = `<div class="choice-shadow"></div>`
+        const choiceShadow = '<div class="choice-shadow"></div>'
         const choiceIcon = `<img class="choice-icon" src="${hand.icon}" alt="${hand.name}">`
         const button = `<div class="choice-item" data-hand="${hand.name}" tabindex="0" role="button">${choiceIcon}${hand.name}${choiceShadow}</div>`
         fragment += button
