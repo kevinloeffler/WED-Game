@@ -1,11 +1,8 @@
-import {RoundResult} from "./roundResult.js";
-import {emptyHand} from "./choices.js";
+import RoundResult from "./roundResult.js"
+import {emptyHand} from "./choices.js"
 
 export class Player {
 
-    nickname
-    score
-    isFake
     history = []
 
     constructor(nickname, isFake, score = 0) {
@@ -19,18 +16,6 @@ export class Player {
 
     addWin() {
         this.score++
-    }
-
-    get score() {
-        return this.score
-    }
-
-    set score(newScore) {
-        this.score = newScore
-    }
-
-    get history() {
-        return this.history
     }
 
     addToHistory(roundResult) {
