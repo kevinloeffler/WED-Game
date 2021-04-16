@@ -1,7 +1,7 @@
 import {hands} from './choices.js'
 import {Player} from './player.js'
 import leaderboard from './leaderboard.js'
-import RoundResult from './roundResult.js'
+import {aiPickHand, evaluateHand, findHand} from "./game-service.js";
 
 // Init
 const player1 = new Player('Marty McFly', true, 11)
@@ -71,7 +71,6 @@ function renderHistory() {
     historyList.innerHTML = ''
 
     for (let i = 0; i < 6; i++) {
-
         const result = `<p>${arr[i].result}</p>`
         const playerPick = `<p>${arr[i].player.name}</p>`
         const aiPick = `<p>${arr[i].ai.name}</p>`
@@ -128,37 +127,8 @@ function userPick(click) {
     const hand = findHand(click.target.getAttribute('data-hand'))
     const opponent = aiPickHand()
     const result = hand.vs(opponent)
-    finishRound(result, hand, opponent)
-}
 
-function findHand(target) {
-    for (const hand of hands) {
-        if (target === hand.name) return hand
-    }
-}
-
-function aiPickHand() {
-    return hands[Math.floor(Math.random() * hands.length)]
-}
-
-function finishRound(roundResult, hand, opponent) {
-    let result = null
-    switch (roundResult) {
-        case 1:
-            result = new RoundResult('Win', hand, opponent)
-            player.addWin()
-            feedback.textContent = 'Congrats, you won!'
-            break
-        case -1:
-            result = new RoundResult('Loss', hand, opponent)
-            feedback.textContent = 'Oh no, you lost.'
-            break
-        case 0:
-            result = new RoundResult('Tie', hand, opponent)
-            feedback.textContent = 'Its a tie.'
-            break
-    }
-    player.addToHistory(result)
+    feedback.textContent = evaluateHand(player, result, hand, opponent)
     renderHistory()
     renderScore(player.score)
     renderRoundFeedbackMsg()
@@ -167,6 +137,7 @@ function finishRound(roundResult, hand, opponent) {
 }
 
 function choicesHandleEnter(key) {
+    /* This helps people with disabilities (no mouse) play the game */
     if (key.keyCode === 13) {
         document.activeElement.click()
     }
@@ -177,25 +148,3 @@ renderLeaderboard()
 enterButton.addEventListener('click', enter)
 leaderboardButton.addEventListener('click', leave)
 document.addEventListener('keyup', choicesHandleEnter)
-
-/*
-console.log('isConnected:', isConnected());
-
-getRankings((rankings) => console.log('rankings:', rankings));
-
-function pickHand() {
-    const handIndex = Math.floor(Math.random() * 3);
-    return HANDS[handIndex];
-}
-
-let count = 1;
-
-function printWinner(hand, didWin) {
-    console.log(count++, hand, didWin);
-}
-
-for (let i = 1; i < 10; i++) {
-    const hand = pickHand();
-    evaluateHand('peter', hand, (didWin) => printWinner(hand, didWin));
-}
-*/
