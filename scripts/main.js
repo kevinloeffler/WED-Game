@@ -39,9 +39,9 @@ function renderLeaderboard() {
     leaderboardList.innerHTML = ''
     const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
     // eslint-disable-next-line no-restricted-syntax
-    for (const player of sorted) {
-        const name = `<div class="leaderboard-player">${player.nickname}</div>`
-        const score = `<div class="leaderboard-score">${player.score} Points</div>`
+    for (const plr of sorted) {
+        const name = `<div class="leaderboard-player">${plr.nickname}</div>`
+        const score = `<div class="leaderboard-score">${plr.score} Points</div>`
         const listItem = `<div class="leaderboard-item">${name}${score}</div>`
         fragment += listItem
     }
