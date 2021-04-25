@@ -39,10 +39,10 @@ function renderLeaderboard() {
     leaderboardList.innerHTML = ''
     const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
     // eslint-disable-next-line no-restricted-syntax
-    for (const p of sorted) {
-        const pName = `<div class="leaderboard-player">${p.nickname}</div>`
-        const pScore = `<div class="leaderboard-score">${p.score} Points</div>`
-        const listItem = `<div class="leaderboard-item">${pName}${pScore}</div>`
+    for (const player of sorted) {
+        const name = `<div class="leaderboard-player">${player.nickname}</div>`
+        const score = `<div class="leaderboard-score">${player.score} Points</div>`
+        const listItem = `<div class="leaderboard-item">${name}${score}</div>`
         fragment += listItem
     }
     leaderboardList.innerHTML = fragment
@@ -57,7 +57,6 @@ function renderChoices() {
         const button = `<div class="choice-item" data-hand="${hand.name}" tabindex="0" role="button">${choiceIcon}${hand.name}${choiceShadow}</div>`
         fragment += button
     }
-    choicesList.addEventListener('click', userPick)
     choicesList.innerHTML = fragment
 }
 
@@ -106,7 +105,7 @@ function changeView(target) {
     }
 }
 
-function enter() {
+function enterGame() {
     if (playerName.value.length < 3 || playerName.value.length > 20) {
         enterError.classList.add('enter-error-msg-active')
     } else {
@@ -122,7 +121,7 @@ function enter() {
     }
 }
 
-function leave() {
+function leaveGame() {
     changeView('leaderboard')
     player = null
 }
@@ -149,6 +148,7 @@ function choicesHandleEnter(key) {
 
 renderChoices()
 renderLeaderboard()
-enterButton.addEventListener('click', enter)
-leaderboardButton.addEventListener('click', leave)
+enterButton.addEventListener('click', enterGame)
+leaderboardButton.addEventListener('click', leaveGame)
+choicesList.addEventListener('click', userPick)
 document.addEventListener('keyup', choicesHandleEnter)
