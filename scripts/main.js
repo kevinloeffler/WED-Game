@@ -36,12 +36,12 @@ function renderPlayerName() {
 
 async function renderWaitText(cooldown) {
     pickPlayerName.innerHTML = `WAIT FOR ${cooldown.toString()} SECONDS`
-    return new Promise(resolve => {
-        setTimeout(() => {resolve(cooldown)}, DELAY_MS);
+    return new Promise((resolve) => {
+        setTimeout(() => { resolve(cooldown) }, DELAY_MS);
     })
 }
 
-async function delay () {
+async function delay() {
     choicesList.classList.add('choices-disabled')
     for (let i = 3; i > 0; i--) {
         await renderWaitText(i)
