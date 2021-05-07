@@ -38,9 +38,10 @@ const mapHand = {
 }
 
 function sanitize(userInput) {
-    if (userInput.length < 3) {
+    if (userInput.length < 3 || userInput.length > 50) {
         return false
     }
+
     const pattern = /^[a-z|0-9]*$/im
     if (!pattern.test(userInput)) {
         return false
