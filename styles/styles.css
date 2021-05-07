@@ -199,13 +199,13 @@ button:focus {
 #pick-player-name {
     font-size: 11px;
     color: var(--passive-gray);
+    margin-bottom: 40px;
 }
 
 /* Hands */
 
 #choices {
     display: flex;
-    padding: 40px 0;
 }
 
 .choice-item {
@@ -262,7 +262,7 @@ button:focus {
 /* Feedback */
 
 .feedback {
-    margin-bottom: 20px;
+    margin: 40px 0;
 }
 
 .feedback span {
