@@ -31,7 +31,11 @@ const historyList = document.querySelector('#history-list')
 const scoreCount = document.querySelector('#score-count')
 
 function renderPlayerName() {
-    pickPlayerName.innerHTML = `PICK YOUR HAND ${player.nickname.toUpperCase()}`
+    if (player === null) {
+        pickPlayerName.innerHTML = 'PICK YOUR HAND'
+    } else {
+        pickPlayerName.innerHTML = `PICK YOUR HAND ${player.nickname.toUpperCase()}`
+    }
 }
 
 async function renderWaitText(cooldown) {
