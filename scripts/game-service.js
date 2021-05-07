@@ -1,7 +1,7 @@
-const DELAY_MS = 1000;
-
 import {hands} from './choices.js'
 import RoundResult from './roundResult.js'
+
+const DELAY_MS = 1000;
 
 export function aiPickHand() {
     return hands[Math.floor(Math.random() * hands.length)]
