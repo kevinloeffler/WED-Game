@@ -129,6 +129,7 @@ input[type='text'] {
     text-align: center;
     padding: 10px 20px;
     margin-bottom: 4px;
+    cursor: text;
 }
 
 input[type='text']:hover {
@@ -152,6 +153,7 @@ button {
     padding: 10px 20px;
     border-radius: 100px;
     border: solid var(--bkg-color) 2px;
+    cursor: pointer;
     transition: color 200ms;
 }
 
@@ -162,6 +164,23 @@ button:hover {
 button:focus {
     outline: none;
     border: solid white 2px;
+}
+
+#change-mode-button {
+    color: var(--passive-gray);
+    background: none;
+}
+
+#change-mode-button:focus {
+    outline: none;
+    border-color: transparent;
+    color: var(--acc-pink);
+}
+
+#change-mode-button:hover {
+    outline: none;
+    border-color: transparent;
+    color: var(--acc-pink);
 }
 
 .enter-error-msg {
