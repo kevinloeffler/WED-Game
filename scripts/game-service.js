@@ -4,6 +4,8 @@ import Player from './player.js'
 import RoundResult from './roundResult.js'
 
 const DELAY_MS = 1000
+const SERVER_RANKING = 'https://stone.dev.ifs.hsr.ch/ranking'
+const SERVER_EVALUATE = 'https://stone.dev.ifs.hsr.ch/play'
 
 export function aiPickHand() {
     return hands[Math.floor(Math.random() * hands.length)]
@@ -22,11 +24,6 @@ const resultsTable = {
     0: ['Tie', 'Its a tie.'],
     '-1': ['Loss', 'Oh no, you lost.'],
 }
-
-// ONLINE
-
-const SERVER_RANKING = 'https://stone.dev.ifs.hsr.ch/ranking'
-const SERVER_EVALUATE = 'https://stone.dev.ifs.hsr.ch/play'
 
 const mapHand = {
     Schere: hands[2],
