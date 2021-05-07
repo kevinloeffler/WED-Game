@@ -219,6 +219,14 @@ button:focus {
     cursor: pointer;
 }
 
+.choices-disabled {
+    color: blue !important;
+    opacity: 0.75 !important;
+    filter: grayscale(0.5) !important;
+    pointer-events: none !important;
+    cursor: wait !important;
+}
+
 .choice-shadow {
     position: absolute;
     top: -20%;

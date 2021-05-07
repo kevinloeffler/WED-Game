@@ -1,7 +1,7 @@
 import {hands} from './choices.js'
 import Player from './player.js'
 import leaderboard from './leaderboard.js'
-import {aiPickHand, evaluateHand, findHand} from './game-service.js'
+import {aiPickHand, evaluateHand, findHand, DELAY_MS} from './game-service.js'
 
 // Init
 const player1 = new Player('Marty McFly', true, 11)
@@ -32,6 +32,22 @@ const scoreCount = document.querySelector('#score-count')
 
 function renderPlayerName() {
     pickPlayerName.innerHTML = `PICK YOUR HAND ${player.nickname.toUpperCase()}`
+}
+
+async function renderWaitText(cooldown) {
+    pickPlayerName.innerHTML = `WAIT FOR ${cooldown.toString()} SECONDS`
+    return new Promise(resolve => {
+        setTimeout(() => {resolve(cooldown)}, DELAY_MS);
+    })
+}
+
+async function delay () {
+    choicesList.classList.add('choices-disabled')
+    for (let i = 3; i > 0; i--) {
+        await renderWaitText(i)
+    }
+    renderPlayerName()
+    choicesList.classList.remove('choices-disabled')
 }
 
 function renderLeaderboard() {
@@ -127,7 +143,7 @@ function leave() {
     player = null
 }
 
-function userPick(click) {
+async function userPick(click) {
     const hand = findHand(click.target.getAttribute('data-hand'))
     const opponent = aiPickHand()
     const result = hand.vs(opponent)
@@ -138,6 +154,8 @@ function userPick(click) {
     renderRoundFeedbackMsg()
     playerHandFeedback.textContent = hand.name
     oppFeedback.textContent = opponent.name
+
+    await delay()
 }
 
 function choicesHandleEnter(key) {
