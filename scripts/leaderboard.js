@@ -7,6 +7,10 @@ const leaderboard = {
         this.localPlayers.push(player)
     },
 
+    addOnlinePlayer(player) {
+        this.serverPlayers.push(player)
+    },
+
     checkPlayerName(name) {
         // eslint-disable-next-line no-restricted-syntax
         for (const player of this.localPlayers) {
