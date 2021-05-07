@@ -83,7 +83,7 @@ h1 {
     text-align: right;
 }
 
-#leaderboard {
+#leaderboard-div {
     display: flex;
     flex-direction: column;
     margin-bottom: 60px;
@@ -223,7 +223,7 @@ button:focus {
 
 /* Hands */
 
-#choices {
+#choices-div {
     display: flex;
 }
 
@@ -313,7 +313,7 @@ button:focus {
     color: var(--passive-gray);
 }
 
-#score-count {
+#score-count-p {
     font-size: 60px;
     line-height: 50px;
     color: rgba(255, 255, 255, 0.001);

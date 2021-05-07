@@ -15,22 +15,22 @@ let online = false
 
 // Assign often used html elements
 const leaderboardView = document.querySelector('.leaderboard-wrapper')
-const leaderboardList = document.querySelector('#leaderboard')
+const leaderboardList = document.querySelector('#leaderboard-div')
 const enterButton = document.querySelector('#enter-button')
 const changeModeButton = document.querySelector('#change-mode-button')
 const enterError = document.querySelector('#enter-error-msg')
-const playerName = document.querySelector('#player-name')
+const playerName = document.querySelector('#player-name-input')
 const playView = document.querySelector('.play-wrapper')
 const pickPlayerName = document.querySelector('#pick-player-name')
 const startGameMsg = document.querySelector('#start-game-msg')
 const feedbackMsg = document.querySelector('#feedback-msg')
-const choicesList = document.querySelector('#choices')
-const feedback = document.querySelector('#feedback')
-const playerHandFeedback = document.querySelector('#player-hand-feedback')
-const oppFeedback = document.querySelector('#opp-feedback')
+const choicesList = document.querySelector('#choices-div')
+const feedback = document.querySelector('#feedback-div')
+const playerHandFeedback = document.querySelector('#player-hand-feedback-span')
+const oppFeedback = document.querySelector('#opp-feedback-span')
 const leaderboardButton = document.querySelector('#leaderboard-button')
 const historyList = document.querySelector('#history-list')
-const scoreCount = document.querySelector('#score-count')
+const scoreCount = document.querySelector('#score-count-p')
 
 function renderPlayerName() {
     if (player === null) {
