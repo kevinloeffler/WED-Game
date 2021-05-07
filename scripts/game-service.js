@@ -1,4 +1,6 @@
 import {hands} from './choices.js'
+import leaderboard from './leaderboard.js'
+import Player from './player.js'
 import RoundResult from './roundResult.js'
 
 const DELAY_MS = 1000;
@@ -27,5 +29,41 @@ function evaluateHand(player, result, hand, opponent) {
     if (result === 1) { player.addWin() }
     return arr[1]
 }
+
+// ONLINE
+
+const SERVER_RANKING = 'https://stone.dev.ifs.hsr.ch/ranking'
+
+const mapHand = {
+    'Schere': hands[2],
+    'Stein': hands[0],
+    'Papier': hands[1]
+}
+
+function sanitize(userInput) {
+    if (userInput.length < 3) {
+        return false
+    }
+    const pattern = /^[a-z|0-9]*$/im
+    if (!pattern.test(userInput)) {
+        return false
+    }
+    return userInput
+}
+
+async function fetchOnlinePlayers () {
+    const response = await fetch(SERVER_RANKING)
+    const players = await response.json()
+
+    for(let prop in players) {
+        const validUser = sanitize(String(players[prop].user))
+        if (validUser) {
+            const importedPlayer = new Player(validUser, true)
+            leaderboard.addOnlinePlayer(importedPlayer)
+        }
+    }
+}
+
+fetchOnlinePlayers()
 
 export {evaluateHand, DELAY_MS}
