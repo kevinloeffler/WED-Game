@@ -44,6 +44,7 @@ async function renderWaitText(cooldown) {
 async function delay() {
     choicesList.classList.add('choices-disabled')
     for (let i = 3; i > 0; i--) {
+        /* eslint-disable no-await-in-loop */
         await renderWaitText(i)
     }
     renderPlayerName()
