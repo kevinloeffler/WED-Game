@@ -3,19 +3,27 @@ const leaderboard = {
     localPlayers: [],
     serverPlayers: [], // for testat part 2
 
-    addPlayer(player) {
-        this.localPlayers.push(player)
+    addPlayer(player, onlineMode) {
+        if (onlineMode) {
+            this.serverPlayers.push(player)
+        } else {
+            this.localPlayers.push(player)
+        }
     },
 
-    addOnlinePlayer(player) {
-        this.serverPlayers.push(player)
-    },
-
-    checkPlayerName(name) {
-        // eslint-disable-next-line no-restricted-syntax
-        for (const player of this.localPlayers) {
-            if (player.nickname === name) {
-                return player
+    checkPlayerName(name, onlineMode) {
+        if (onlineMode) {
+            // eslint-disable-next-line no-restricted-syntax
+            for (const player of this.serverPlayers) {
+                if (player.nickname === name) {
+                    return player
+                }
+            }
+        } else {
+            for (const player of this.localPlayers) {
+                if (player.nickname === name) {
+                    return player
+                }
             }
         }
         return null

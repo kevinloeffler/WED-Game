@@ -11,11 +11,13 @@ leaderboard.addPlayer(player1)
 leaderboard.addPlayer(player2)
 leaderboard.addPlayer(player3)
 let player = null
+let online = false
 
 // Assign often used html elements
 const leaderboardView = document.querySelector('.leaderboard-wrapper')
 const leaderboardList = document.querySelector('#leaderboard')
 const enterButton = document.querySelector('#enter-button')
+const changeModeButton = document.querySelector('#change-mode-button')
 const enterError = document.querySelector('#enter-error-msg')
 const playerName = document.querySelector('#player-name')
 const playView = document.querySelector('.play-wrapper')
@@ -58,7 +60,14 @@ async function delay() {
 function renderLeaderboard() {
     let fragment = ''
     leaderboardList.innerHTML = ''
-    const sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
+
+    let sorted
+    if (online) {
+        sorted = leaderboard.serverPlayers.sort(leaderboard.sortPlayers)
+    } else {
+        sorted = leaderboard.localPlayers.sort(leaderboard.sortPlayers)
+    }
+
     let counter = 10
     // eslint-disable-next-line no-restricted-syntax
     for (const plr of sorted) {
@@ -135,15 +144,20 @@ function enterGame() {
         enterError.classList.add('enter-error-msg-active')
     } else {
         enterError.classList.remove('enter-error-msg-active')
-        const playerRequestingEnter = leaderboard.checkPlayerName(playerName.value)
+        const playerRequestingEnter = leaderboard.checkPlayerName(playerName.value, online)
         if (playerRequestingEnter) {
             player = playerRequestingEnter
         } else {
             player = new Player(playerName.value, false)
-            leaderboard.addPlayer(player)
+            leaderboard.addPlayer(player, online)
         }
         changeView('play')
     }
+}
+
+function changeGameMode() {
+    online = !online
+    renderLeaderboard()
 }
 
 function leaveGame() {
@@ -176,6 +190,7 @@ function choicesHandleEnter(key) {
 renderChoices()
 renderLeaderboard()
 enterButton.addEventListener('click', enterGame)
+changeModeButton.addEventListener('click', changeGameMode)
 leaderboardButton.addEventListener('click', leaveGame)
 choicesList.addEventListener('click', userPick)
 document.addEventListener('keyup', choicesHandleEnter)

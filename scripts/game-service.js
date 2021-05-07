@@ -58,8 +58,8 @@ async function fetchOnlinePlayers () {
     for(let prop in players) {
         const validUser = sanitize(String(players[prop].user))
         if (validUser) {
-            const importedPlayer = new Player(validUser, true)
-            leaderboard.addOnlinePlayer(importedPlayer)
+            const importedPlayer = new Player(validUser, true, players[prop].win)
+            leaderboard.addPlayer(importedPlayer, true)
         }
     }
 }
