@@ -33,11 +33,19 @@ function evaluateHand(player, result, hand, opponent) {
 // ONLINE
 
 const SERVER_RANKING = 'https://stone.dev.ifs.hsr.ch/ranking'
+const SERVER_EVALUATE = 'https://stone.dev.ifs.hsr.ch/play'
 
 const mapHand = {
     'Schere': hands[2],
     'Stein': hands[0],
-    'Papier': hands[1]
+    'Papier': hands[1],
+    'stone': 'Stein',
+    'paper': 'Papier',
+    'scissor': 'Schere',
+}
+
+function buildRequest(player, hand) {
+    return `${SERVER_EVALUATE}?playerName=${player}&playerHand=${hand}&mode=normal`
 }
 
 function sanitize(userInput) {
@@ -51,7 +59,7 @@ function sanitize(userInput) {
     return userInput
 }
 
-async function fetchOnlinePlayers () {
+async function fetchOnlinePlayers() {
     const response = await fetch(SERVER_RANKING)
     const players = await response.json()
 
@@ -64,6 +72,26 @@ async function fetchOnlinePlayers () {
     }
 }
 
+async function fetchOnlineEval(player, hand) {
+    const request = `${SERVER_EVALUATE}?playerName=${player.nickname}&playerHand=${mapHand[hand.name]}&mode=normal`
+    const response = await fetch(request)
+    return await response.json()
+}
+
+async function getOnlineResult (player, hand) {
+    const result = await fetchOnlineEval(player, hand)
+    if (result.hasOwnProperty('win')) {
+        if (result.win) {
+            return 1
+        }
+        return -1
+    }
+    return 0
+}
+
 fetchOnlinePlayers()
+// const testRes = await getOnlineResult(new Player('Joel', true), hands[1])
+// console.log(testRes)
+
 
 export {evaluateHand, DELAY_MS}
