@@ -1,4 +1,4 @@
-// const DELAY_MS = 1000; -> For Testat 2
+const DELAY_MS = 1000;
 
 import {hands} from './choices.js'
 import RoundResult from './roundResult.js'
@@ -21,9 +21,11 @@ const resultsTable = {
     '-1': ['Loss', 'Oh no, you lost.'],
 }
 
-export function evaluateHand(player, result, hand, opponent) {
+function evaluateHand(player, result, hand, opponent) {
     const arr = resultsTable[result]
     player.addToHistory(new RoundResult(arr[0], hand, opponent))
     if (result === 1) { player.addWin() }
     return arr[1]
 }
+
+export {evaluateHand, DELAY_MS}
