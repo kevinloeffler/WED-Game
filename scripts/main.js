@@ -1,7 +1,7 @@
 import {hands} from './choices.js'
 import Player from './player.js'
 import leaderboard from './leaderboard.js'
-import {aiPickHand, evaluateHand, findHand, DELAY_MS} from './game-service.js'
+import {evaluateHand, findHand, DELAY_MS} from './game-service.js'
 
 // Init
 const player1 = new Player('Marty McFly', true, 11)
@@ -167,15 +167,15 @@ function leaveGame() {
 
 async function userPick(click) {
     const hand = findHand(click.target.getAttribute('data-hand'))
-    const opponent = aiPickHand()
-    const result = hand.vs(opponent)
 
-    feedback.textContent = evaluateHand(player, result, hand, opponent)
+    const fb = await evaluateHand(player, hand, online)
+
     renderHistory()
     renderScore(player.score)
     renderRoundFeedbackMsg()
     playerHandFeedback.textContent = hand.name
-    oppFeedback.textContent = opponent.name
+    feedback.textContent = fb.msg
+    oppFeedback.textContent = fb.opp
 
     await delay()
 }

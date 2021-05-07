@@ -23,11 +23,30 @@ const resultsTable = {
     '-1': ['Loss', 'Oh no, you lost.'],
 }
 
-function evaluateHand(player, result, hand, opponent) {
-    const arr = resultsTable[result]
-    player.addToHistory(new RoundResult(arr[0], hand, opponent))
+async function evaluateHand(player, hand, isOnline) {
+    let result
+    let opponent
+
+    if (isOnline) {
+        result = await getOnlineResult(player, hand)
+        if (result === 1) {
+            opponent = hand.wins[0]
+        } else if (result === -1) {
+            opponent = hand.loses[0]
+        } else {
+            opponent = hand
+        }
+    } else {
+        opponent = aiPickHand()
+        result = hand.vs(opponent)
+    }
+
+    const feedback = {res: resultsTable[result][0], msg: resultsTable[result][1], opp: opponent.name}
+
+    player.addToHistory(new RoundResult(feedback.res, hand, opponent))
     if (result === 1) { player.addWin() }
-    return arr[1]
+
+    return feedback
 }
 
 // ONLINE
@@ -39,7 +58,7 @@ const mapHand = {
     'Schere': hands[2],
     'Stein': hands[0],
     'Papier': hands[1],
-    'stone': 'Stein',
+    'rock': 'Stein',
     'paper': 'Papier',
     'scissor': 'Schere',
 }
