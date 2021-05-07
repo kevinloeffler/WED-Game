@@ -156,7 +156,13 @@ function enterGame() {
 }
 
 function changeGameMode() {
-    online = !online
+    if (online) {
+        online = false
+        changeModeButton.textContent = 'PLAY ONLINE'
+    } else {
+        online = true
+        changeModeButton.textContent = 'PLAY OFFLINE'
+    }
     renderLeaderboard()
 }
 

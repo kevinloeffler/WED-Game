@@ -174,7 +174,7 @@ button:focus {
 #change-mode-button:focus {
     outline: none;
     border-color: transparent;
-    color: var(--acc-pink);
+    color: #818493;
 }
 
 #change-mode-button:hover {
