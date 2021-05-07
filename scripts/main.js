@@ -43,7 +43,7 @@ function renderPlayerName() {
 async function renderWaitText(cooldown) {
     pickPlayerName.innerHTML = `WAIT FOR ${cooldown.toString()} SECONDS`
     return new Promise((resolve) => {
-        setTimeout(() => { resolve(cooldown) }, DELAY_MS);
+        setTimeout(() => { resolve(cooldown) }, DELAY_MS)
     })
 }
 

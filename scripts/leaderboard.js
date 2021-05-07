@@ -20,6 +20,7 @@ const leaderboard = {
                 }
             }
         } else {
+            // eslint-disable-next-line no-restricted-syntax
             for (const player of this.localPlayers) {
                 if (player.nickname === name) {
                     return player
