@@ -239,11 +239,11 @@ button:focus {
 }
 
 .choices-disabled {
-    color: blue !important;
-    opacity: 0.75 !important;
-    filter: grayscale(0.5) !important;
-    pointer-events: none !important;
-    cursor: wait !important;
+    color: blue;
+    opacity: 0.75;
+    filter: grayscale(0.5);
+    pointer-events: none;
+    cursor: wait;
 }
 
 .choice-shadow {
