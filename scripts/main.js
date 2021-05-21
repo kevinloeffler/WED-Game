@@ -12,6 +12,7 @@ leaderboard.addPlayer(player2)
 leaderboard.addPlayer(player3)
 let player = null
 let online = false
+let activeCooldown = false
 
 // Assign often used html elements
 const leaderboardView = document.querySelector('.leaderboard-wrapper')
@@ -48,6 +49,7 @@ async function renderWaitText(cooldown) {
 }
 
 async function delay() {
+    activeCooldown = true
     choicesList.classList.add('choices-disabled')
     for (let i = 3; i > 0; i--) {
         /* eslint-disable no-await-in-loop */
@@ -55,6 +57,7 @@ async function delay() {
     }
     renderPlayerName()
     choicesList.classList.remove('choices-disabled')
+    activeCooldown = false
 }
 
 function renderLeaderboard() {
@@ -126,7 +129,9 @@ function renderScore(newScore) {
 
 function changeView(target) {
     if (target === 'play') {
-        renderPlayerName()
+        if (!activeCooldown) {
+            renderPlayerName()
+        }
         renderStartGameMsg()
         renderHistory()
         renderScore(player.score)
@@ -172,18 +177,20 @@ function leaveGame() {
 }
 
 async function userPick(click) {
-    const hand = findHand(click.target.getAttribute('data-hand'))
+    if (!activeCooldown) {
+        const hand = findHand(click.target.getAttribute('data-hand'))
 
-    const fb = await evaluateHand(player, hand, online)
+        const fb = await evaluateHand(player, hand, online)
 
-    renderHistory()
-    renderScore(player.score)
-    renderRoundFeedbackMsg()
-    playerHandFeedback.textContent = hand.name
-    feedback.textContent = fb.msg
-    oppFeedback.textContent = fb.opp
+        renderHistory()
+        renderScore(player.score)
+        renderRoundFeedbackMsg()
+        playerHandFeedback.textContent = hand.name
+        feedback.textContent = fb.msg
+        oppFeedback.textContent = fb.opp
 
-    await delay()
+        await delay()
+    }
 }
 
 function choicesHandleEnter(key) {
