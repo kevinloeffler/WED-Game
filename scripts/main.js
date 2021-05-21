@@ -4,9 +4,9 @@ import leaderboard from './leaderboard.js'
 import {evaluateHand, findHand, DELAY_MS} from './game-service.js'
 
 // Init
-const player1 = new Player('Marty McFly', true, 11)
-const player2 = new Player('Axel Foley', true, 2)
-const player3 = new Player('Ferris Bueller', true, 5)
+const player1 = new Player('Marty McFly', 11)
+const player2 = new Player('Axel Foley', 2)
+const player3 = new Player('Ferris Bueller', 5)
 leaderboard.addPlayer(player1)
 leaderboard.addPlayer(player2)
 leaderboard.addPlayer(player3)
@@ -148,7 +148,7 @@ function enterGame() {
         if (playerRequestingEnter) {
             player = playerRequestingEnter
         } else {
-            player = new Player(playerName.value, false)
+            player = new Player(playerName.value)
             leaderboard.addPlayer(player, online)
         }
         changeView('play')

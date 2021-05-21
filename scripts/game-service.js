@@ -55,7 +55,7 @@ async function fetchOnlinePlayers() {
         if (Object.prototype.hasOwnProperty.call(players, prop)) {
             const validUser = sanitize(String(players[prop].user))
             if (validUser) {
-                const importedPlayer = new Player(validUser, true, players[prop].win)
+                const importedPlayer = new Player(validUser, players[prop].win)
                 leaderboard.addPlayer(importedPlayer, true)
             }
         }
