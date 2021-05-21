@@ -2,7 +2,7 @@ import RoundResult from './roundResult.js'
 import {emptyHand} from './choices.js'
 
 class Player {
-    constructor (nickname, score = 0) {
+    constructor(nickname, score = 0) {
         this.nickname = nickname
         this.score = score
         this.history = []

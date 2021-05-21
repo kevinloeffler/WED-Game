@@ -1,7 +1,7 @@
 const leaderboard = {
 
     localPlayers: [],
-    serverPlayers: [], // for testat part 2
+    serverPlayers: [],
 
     addPlayer(player, onlineMode) {
         if (onlineMode) {
